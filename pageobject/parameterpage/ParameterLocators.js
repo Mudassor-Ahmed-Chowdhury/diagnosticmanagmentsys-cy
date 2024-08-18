@@ -1,6 +1,6 @@
 class ParameterLocators{
     setnameofUOM(uomname){
-        return cy.xpath("//input[@placeholder='cells/ÂµL']").click().click().type(uomname).wait(3000);
+        return cy.xpath("//input[@placeholder='cells/µL']").click().click().type(uomname).wait(3000);
     }
 
     UOMsidebar(){
@@ -147,6 +147,22 @@ class ParameterLocators{
         cy.xpath(`//span[contains(text(), '${errorMessage}')]`)
             .should('be.visible');
         return this;
+    }
+
+    sidebarAttributegroup(){
+        return cy.xpath("(//span[normalize-space()='Attribute Group'])[1]").click();
+    }
+
+    addArtibutegroupbutton(){
+        return cy.xpath("//span[normalize-space()='Add Attribute Group']").click();
+    }
+
+    setAttributename(attributename){
+        return cy.xpath("//input[@placeholder='enter attribute name']").click().clear().type(attributename).wait(2000);
+    }
+
+    attributegroupSavebutton(){
+        return cy.xpath("//span[normalize-space()='Save']").click();
     }
 
 

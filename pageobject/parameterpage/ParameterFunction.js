@@ -214,8 +214,43 @@ class ParameterFunction{
         cy.get('input[placeholder="500"]').scrollIntoView().should('be.visible').click({ force: true }); // Scroll the input field into view and click
 
         return this;
+    }
 
+    attributeName(attributename) {
+
+        if (!attributename || attributename.trim() === '') {
+            throw new Error('The name field is required.');
+        }
+
+        if (attributename.length < 2) {
+            throw new Error('The name field must be at least 2 characters.');
+        }
+
+        const hasNumericChars = /\d/;
+        if (hasNumericChars.test(attributename)) {
+            throw new Error('Attribute name cannot contain numeric characters.');
+        }
+
+        if (attributename.length > 50) {
+            throw new Error('Attribute name cannot be longer than 50 characters.');
+        }
+
+        const invalidSpecialChars = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?`~]/;
+        if (invalidSpecialChars.test(attributename)) {
+            throw new Error('Attribute name contains invalid special characters.');
+        }
+
+        return this.pl.setAttributename(attributename);
+    }   // Check if the input is provided, the input is at least 2 characters long, the input contains numeric characters, the input is longer than 50 characters, the input contains invalid special characters
+
+    selectAttributegroup(){
+        this.gf.clickParentContent('Parameter');
+        this.pl.sidebarAttributegroup();
+        return this;
 
     }
+
+
+
 }
 export default ParameterFunction;
