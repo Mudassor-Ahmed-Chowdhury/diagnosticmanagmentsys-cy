@@ -28,6 +28,7 @@ class GlobalFunction{
          this.lp.setEmail('demo@dms.com');
          this.lp.setPassword("password");
          this.lp.Loginbutton();
+         return this;
     }
 
 }

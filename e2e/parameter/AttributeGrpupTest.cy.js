@@ -1,12 +1,16 @@
 import ParameterFunction from "../../pageobject/parameterpage/ParameterFunction";
+import GlobalFunction from "../../pageobject/globalpage/GlobalFunction";
 
 describe('Attribute Name Validation', () => {
     const pf = new ParameterFunction();
+    const gf = new GlobalFunction();
 
     beforeEach(() => {
         cy.viewport(Cypress.config('viewportWidth'), Cypress.config('viewportHeight'));
         cy.visit(Cypress.config('baseUrl'));
-
+        gf.Adminuser();
+        pf.selectAttributegroup()
+            // .addAtributegroupbutton();
     });
 
     it('should throw an error if the name is not provided', () => {
@@ -40,4 +44,8 @@ describe('Attribute Name Validation', () => {
         const result = pf.attributeName(validName);
         expect(result).to.equal(validName);
     });
+
+    it.only('attribute name should be unique', () => {
+        pf.checkattributeTabledataunique();
+    })
 });

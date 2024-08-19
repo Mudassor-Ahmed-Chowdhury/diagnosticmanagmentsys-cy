@@ -1,6 +1,6 @@
 class ParameterLocators{
     setnameofUOM(uomname){
-        return cy.xpath("//input[@placeholder='cells/µL']").click().click().type(uomname).wait(3000);
+        return cy.xpath("//input[@placeholder='cells/ï¿½L']").click().click().type(uomname).wait(3000);
     }
 
     UOMsidebar(){
@@ -164,6 +164,66 @@ class ParameterLocators{
     attributegroupSavebutton(){
         return cy.xpath("//span[normalize-space()='Save']").click();
     }
+
+    attributeTabledata(){
+        return cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+            .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
+            .xpath("//tbody[1]/tr/td[3]")
+
+    }
+
+    sidebarTestAdditionalitems(){
+        return cy.xpath("(//span[normalize-space()='Test Additional Items'])[1]").click().wait(3000);
+    }
+
+    testaddtionalitemsTable(){
+        return cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+            .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
+            .xpath("//tbody[1]/tr/td[2]")
+    }
+
+    addtestadditionalitems(){
+        cy.xpath("(//span[normalize-space()='Add Test Additional Item'])[1]").click().wait(2000);
+    }
+
+    setNameoftestadditionalitems(nameoftestadditionalitems){
+        return cy.xpath("(//input[@placeholder='Needle'])[1]").click().clear().type(nameoftestadditionalitems).wait(2000);
+    }
+
+    setShortnameoftestadditionalitems(shortnameoftestadditinalitems){
+       return  cy.xpath("(//input[@placeholder='nd'])[1]").click().clear().type(shortnameoftestadditinalitems).wait(2000);
+    }
+
+    selectTestoftestadditionalitems(){
+        return cy.xpath("(//div[@class='multiselect-wrapper'])[1]")
+            .xpath("(//input[@role='combobox'])[1]").click().type('L').clear();
+    }
+
+    selectMesurementunitoftestadditionalitems(){
+        return cy.xpath("(//label[@class='w-1/2'])[1]")
+            .xpath("(//select[@class='w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg'])[1]")
+
+    }
+
+    setPurchaseamountoftestadditionalitems(purchaseamount){
+        return cy.xpath("(//input[@placeholder='500'])[1]").click().clear().type(purchaseamount);
+    }
+
+    setAmountoftestadditionalitems(amountoftestadditionalitems){
+        return cy.xpath("(//input[@placeholder='550'])[1]").click().clear().type(amountoftestadditionalitems).wait(2000);
+    }
+
+    selectSampleoftestadditionalitems(){
+        return cy.xpath("(//select[@class='w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg'])[2]");
+    }
+
+    saveButtonoftestadditionalitems(){
+        return cy.xpath("(//span[normalize-space()='Add'])[1]").click();
+    }
+
+    clearIcon(){
+        return cy.xpath("(//span[@class='multiselect-clear-icon'])[1]").click();
+    } //Cross icon locator of select test from add test additional itmes form page
 
 
 }

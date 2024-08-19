@@ -1,6 +1,8 @@
 class LoginLocators{
     setEmail(email){
-        cy.xpath("//input[@placeholder='enter email']").click().clear().type(email).wait(3000);
+        cy.xpath("//input[@placeholder='enter email']").click().clear().type(email).wait(3000)
+        return this;
+
     }
 
     setPassword(password){

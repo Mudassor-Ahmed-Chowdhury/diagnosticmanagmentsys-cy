@@ -207,7 +207,6 @@ class ParameterFunction{
                 // Ensure the dropdown is visible
                 cy.xpath("(//div[@id='undefined-dropdown'])[1]").should('be.visible');
 
-                // Scroll the item into view and then click
                 cy.wrap(randomItem).scrollIntoView().should('be.visible').click({ force: true });
             });
 
@@ -247,10 +246,140 @@ class ParameterFunction{
         this.gf.clickParentContent('Parameter');
         this.pl.sidebarAttributegroup();
         return this;
+    }
 
+    addAtributegroupbutton(){
+        this.pl.addArtibutegroupbutton();
+        return this;
+    }
+
+    checkattributeTabledataunique(){
+        this.pl.attributeTabledata().then((cells) => {
+            const columnData = Array.from(cells).map(cell => cell.textContent.trim());
+            const seen = new Set();
+            const duplicates = new Set();
+            columnData.forEach(item => {
+                if (seen.has(item)) {
+                    duplicates.add(item);
+                } else {
+                    seen.add(item);
+                }
+            });
+            if (duplicates.size > 0) {
+                cy.log(`Non-unique data found: ${[...duplicates].join(', ')}`);
+                expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but all data was non unique: ${[...seen].join(', ')}`);
+            } else {
+                cy.log('All data in column 2 is unique.');
+            }
+        });
+        return this;
+    }
+
+    //Select test from add test additionalitem's form page
+    selectTest(){
+        this.pl.selectTestoftestadditionalitems().click({force: true});
+        cy.xpath("(//div[@id='undefined-dropdown'])[1]/ul//li")
+            .then(($listItems) => {
+                const items = $listItems.toArray();
+                const randomIndex = Math.floor(Math.random() * items.length);
+                const randomItem = items[randomIndex];
+                const ariaLabel = Cypress.$(randomItem).attr('aria-label');
+
+                cy.log(`Selected aria-label: ${ariaLabel}`);
+
+                cy.xpath("(//div[@id='undefined-dropdown'])[1]").should('be.visible');
+
+                cy.wrap(randomItem).scrollIntoView().should('be.visible').click({ force: true });
+            });
+        return this;
+    }
+
+    // selectMeasurement() {
+    //     this.pl.selectMesurementunitoftestadditionalitems().then($select => {
+    //         cy.log(`Element Tag: ${$select.prop('tagName')}`);
+    //         if ($select.length) {
+    //             const $options = $select.find('option');
+    //             if ($options.length > 1) {
+    //                 const randomIndex = Math.floor(Math.random() * ($options.length - 1)) + 1;
+    //                 const randomValue = $options.eq(randomIndex).val();
+    //                 cy.wrap($select).select(randomValue);
+    //                 const selectedText = $options.eq(randomIndex).text();
+    //                 cy.log(`Selected Mesurement: ${selectedText}`);
+    //             } else {
+    //                 cy.log('No valid Mesurement Unit found to select');
+    //             }
+    //         } else {
+    //             cy.log('Select element not found');
+    //         }
+    //     });
+    //     return this;
+    // }
+
+    selectMeasurement(){
+        this.pl.selectMesurementunitoftestadditionalitems().select("MM");
+        return this ;
+    } // Static measurement unit
+
+
+    selectSampleoftestadditionalitems() {
+        this.pl.selectSampleoftestadditionalitems().then($select => {
+            cy.log(`Element Tag: ${$select.prop('tagName')}`);
+            if ($select.length) {
+                const $options = $select.find('option');
+                if ($options.length > 1) {
+                    const randomIndex = Math.floor(Math.random() * ($options.length - 1)) + 1;
+                    const randomValue = $options.eq(randomIndex).val();
+                    cy.wrap($select).select(randomValue);
+                    const selectedText = $options.eq(randomIndex).text();
+                    cy.log(`Selected Sample: ${selectedText}`);
+                } else {
+                    cy.log('No valid Sample (test additional items) found to select');
+                }
+            } else {
+                cy.log('Select element not found');
+            }
+        });
+        return this;
     }
 
 
 
+    selectTestadditionalItemsfromsidebar(){
+        this.gf.clickParentContent('Parameter');
+        this.pl.sidebarTestAdditionalitems();
+        return this;
+    }
+
+    createTestadditionalitems(){
+        this.pl.addtestadditionalitems();
+        return this;
+    }
+
+    validaddtestadditionalitems(){
+        this.pl.setNameoftestadditionalitems('Niddle Niddle Niddle');
+        this.pl.setShortnameoftestadditionalitems('N N N');
+        this.selectTest()
+            .selectMeasurement()
+            .selectSampleoftestadditionalitems();
+        this.pl.setPurchaseamountoftestadditionalitems('500');
+        this.pl.setAmountoftestadditionalitems('550');
+        this.pl.saveButtonoftestadditionalitems();
+    }
+
+    invalidSampleoftestadditionalitems(){
+
+        this.pl.setNameoftestadditionalitems('Niddle Niddle Niddle');
+        this.pl.setShortnameoftestadditionalitems('N N N');
+        this.selectTest()
+            .selectMeasurement()
+            .selectSampleoftestadditionalitems();
+        this.pl.setPurchaseamountoftestadditionalitems('500');
+        this.pl.setAmountoftestadditionalitems('550');
+        this.pl.clearIcon();
+        this.selectTest();
+        this.pl.saveButtonoftestadditionalitems();
+        this.pl.checkErrorToastMessage();
+
+    }
 }
 export default ParameterFunction;
