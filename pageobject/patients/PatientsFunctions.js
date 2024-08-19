@@ -1,13 +1,11 @@
 import GlobalFunction from "../globalpage/GlobalFunction";
-import DepartmentLocators from "./DepartmentLocators";
 
-class DepartmentFunction{
+class PatientsFunctions{
     constructor() {
-        this.dl = new DepartmentLocators();
+        this.patientslocators = new PatientsLocators();
     };
-
-    nameofdepartmentDataduplicate(){
-        this.dl.departmenttableDataofname.then((cells) => {
+    patientsidDuplicate(){
+        this.patientsidDuplicate().then((cells) => {
             const columnData = Array.from(cells).map(cell => cell.textContent.trim());
             const seen = new Set();
             const duplicates = new Set();
@@ -29,4 +27,4 @@ class DepartmentFunction{
     }
 
 }
-export default DepartmentFunction;
+export default PatientsFunctions;

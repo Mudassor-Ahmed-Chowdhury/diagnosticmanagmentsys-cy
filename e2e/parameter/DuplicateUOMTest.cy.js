@@ -17,4 +17,4 @@ describe('Duplicate UOM name should not exist in table', () => {
         pf.checkUniqueColumnData()
     })
 
-});
+})
