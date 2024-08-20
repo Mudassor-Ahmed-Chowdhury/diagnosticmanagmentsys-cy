@@ -6,7 +6,7 @@ class PatientsLocators{
         this.gf = new GlobalFunction();
     };
 
-    sidebarDepartment(){
+    sidebarPatients(){
         this.gf.clickParentContent('Patients');
     }
 

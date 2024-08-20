@@ -287,27 +287,6 @@ class ParameterFunction{
         return this;
     }
 
-    // selectMeasurement() {
-    //     this.pl.selectMesurementunitoftestadditionalitems().then($select => {
-    //         cy.log(`Element Tag: ${$select.prop('tagName')}`);
-    //         if ($select.length) {
-    //             const $options = $select.find('option');
-    //             if ($options.length > 1) {
-    //                 const randomIndex = Math.floor(Math.random() * ($options.length - 1)) + 1;
-    //                 const randomValue = $options.eq(randomIndex).val();
-    //                 cy.wrap($select).select(randomValue);
-    //                 const selectedText = $options.eq(randomIndex).text();
-    //                 cy.log(`Selected Mesurement: ${selectedText}`);
-    //             } else {
-    //                 cy.log('No valid Mesurement Unit found to select');
-    //             }
-    //         } else {
-    //             cy.log('Select element not found');
-    //         }
-    //     });
-    //     return this;
-    // }
-
     selectMeasurement(){
         this.pl.selectMesurementunitoftestadditionalitems().select("MM");
         return this ;
