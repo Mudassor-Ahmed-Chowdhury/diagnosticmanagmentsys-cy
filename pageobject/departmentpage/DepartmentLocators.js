@@ -7,7 +7,7 @@ class DepartmentLocators{
     };
 
     sidebarDepartment(){
-        this.gf.clickParentContent('Department');
+        this.gf.clickParentContent('Departments');
     }
 
     addDepartment(){
@@ -15,7 +15,9 @@ class DepartmentLocators{
     }
 
     setDepartmentname(departmentname){
-        return cy.xpath("(//input[@placeholder='Enter Department Name'])[1]").click().clear().type(departmentname);
+        return cy.xpath("(//input[@placeholder='Enter Department Name'])[1]").click().clear().type(departmentname)
+            .should('not.have.value', /[^a-zA-Z\s]/);
+        
     }
 
     selectDepartmenthead(){
@@ -34,7 +36,32 @@ class DepartmentLocators{
     departmenttableDataofname(){
         return cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
             .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
-            .xpath("//tbody[1]/tr/td[2]")
+            .xpath("//tbody[1]/tr/td[2]");
+
+    }
+
+    setSearchbyname(searchbyname){
+        return cy.xpath("(//input[@placeholder='Search by name'])[1]").click().clear().type(searchbyname);
+    }
+
+    searchByNameError() {
+        cy.get("body div iframe")
+            .its('0.contentDocument.body', { log: true })
+            .should('be.visible')
+            .then(($body) => {
+                if ($body) {
+                    throw new Error('Iframe body of SQL error should not be visible ');
+                }
+            })
+    }    // SQL database error when search any data
+
+
+    unabletocreateToastmessage(){
+        return cy.get('.v-toast__item');
+    }
+
+    successfulToastmessage(){
+        return cy.get('.v-toast__item');
     }
 
 

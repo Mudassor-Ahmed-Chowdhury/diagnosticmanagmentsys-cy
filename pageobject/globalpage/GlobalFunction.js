@@ -24,6 +24,18 @@ class GlobalFunction{
             });
     }
 
+    checkRequiredFieldErrors() {
+        cy.xpath("//span[contains(text(), 'This field is required')]")
+            .should('be.visible');
+        return this;
+    }
+
+    checkFieldValidationError(field, errorMessage) {
+        cy.xpath(`//span[contains(text(), '${errorMessage}')]`)
+            .should('be.visible');
+        return this;
+    }
+
     Adminuser(){
          this.lp.setEmail('demo@dms.com');
          this.lp.setPassword("password");

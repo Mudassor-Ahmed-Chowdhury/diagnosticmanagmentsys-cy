@@ -183,13 +183,6 @@ class ParameterFunction{
         return this;
     }
 
-    // selectSamplefun(){
-    //     this.pl.selectSample().then($select => {
-    //         if ($select.length){
-    //             const $options = $select.find()
-    //         }
-    //     })
-    // }
 
     selectSamplefun(){
 
