@@ -1,6 +1,6 @@
-import PatientsLocators from "../../pageobject/patients/PatientsLocators";
+import PatientsLocators from "../../pageobject/patientspage/PatientsLocators";
 import GlobalFunction from "../../pageobject/globalpage/GlobalFunction";
-import PatientsFunction from"../../pageobject/patients/PatientsFunctions"
+import PatientsFunction from"../../pageobject/patientspage/PatientsFunctions";
 
 
 describe('', () =>{

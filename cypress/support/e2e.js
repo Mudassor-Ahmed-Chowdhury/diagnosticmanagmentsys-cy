@@ -17,6 +17,7 @@
 import './commands'
 require('cypress-xpath');
 require('cypress-iframe');
+import 'cypress-mochawesome-reporter/register';
 
 
 // Alternatively you can use CommonJS syntax:

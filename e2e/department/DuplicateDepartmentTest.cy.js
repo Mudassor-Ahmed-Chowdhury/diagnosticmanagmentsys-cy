@@ -17,7 +17,7 @@ describe('Duplicate department name should not exist', () => {
         dl.sidebarDepartment();
     });
 
-    it.only('duplicate data should not exist', () => {
+    it('duplicate data should not exist', () => {
         df.nameofdepartmentDataduplicate();
     });
 

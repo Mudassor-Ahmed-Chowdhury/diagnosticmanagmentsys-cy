@@ -43,5 +43,15 @@ class GlobalFunction{
          return this;
     }
 
+    unabletocreateToastmessage(){
+        cy.get('.v-toast__item');
+        return this;
+    }
+
+    successfulToastmessage(){
+        cy.get('.v-toast__item');
+        return this;
+    }
+
 }
 export default GlobalFunction;
