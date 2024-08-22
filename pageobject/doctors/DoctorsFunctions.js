@@ -1,0 +1,134 @@
+import GlobalFunction from "../globalpage/GlobalFunction";
+import DoctorsLocators from "../doctors/DoctorsLocators";
+
+class DoctorsFunctions{
+    constructor() {
+        this.gf = new GlobalFunction();
+        this.doctorlocators = new DoctorsLocators();
+    }
+
+    validateDifferentNumbers(doctorsPhoneNumber, doctorsEmergencyNumber) {
+        if (doctorsPhoneNumber === doctorsEmergencyNumber) {
+            this.gf.checkFieldValidationError(
+                'phone',
+                'Phone Number and Emergency Number should not be the same'
+            );
+        }
+        return this;
+    }
+
+    checkDuplicatephonenumber(){
+        this.doctorlocators.doctorstablePhonenumber()
+            .then((cells) => {
+            const columnData = Array.from(cells).map(cell => cell.textContent.trim());
+            const seen = new Set();
+            const duplicates = new Set();
+            columnData.forEach(item => {
+                if (seen.has(item)) {
+                    duplicates.add(item);
+                } else {
+                    seen.add(item);
+                }
+            });
+            if (duplicates.size > 0) {
+                cy.log(`Non-unique data found: ${[...duplicates].join(', ')}`);
+                expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but all data was non unique: ${[...seen].join(', ')}`);
+            } else {
+                cy.log('All data in column 2 is unique.');
+            }
+        });
+        return this;
+    }
+
+    phonenumberValidate(doctorsphonenumber)
+    {
+        this.doctorlocators.setdoctorsPhoneNumber(doctorsphonenumber);
+
+        const validPrefixes = ['017', '013', '014', '015', '018', '019', '016'];
+        const isValid = doctorsphonenumber.length === 11 && validPrefixes.includes(doctorsphonenumber.substring(0, 3));
+
+        if (!isValid) {
+            this.globalfunction.checkFieldValidationError('phone', 'The phone field format is invalid.');
+        }
+    }
+
+    editdoctorsFirstNameusinginvaliddata(){
+        this.doctorlocators.setdoctorsFirstName('#$%% #%%##%  856'.repeat(51));
+        this.gf.checkFieldValidationError('frist_name', 'The frist name formate is invalid');
+    } // Field validation checking by using invalid data for frist name
+
+    editdoctorsLastNameusinginvaliddata(){
+        this.doctorlocators.setdoctorsLastName('#$%% #%%##%  856'.repeat(51));
+        this.gf.checkFieldValidationError('frist_name', 'The frist name formate is invalid');
+    } // Field validation checking by using invalid data for last name
+
+    editdoctorsPhoneNumberEmergencyNumberValidation(){
+        this.doctorlocators.setdoctorsPhoneNumber('01311773124')
+            .setdoctorsEmergencyNumber('01311773124');
+        this.validateDifferentNumbers('01311773124','01311773124');
+    } // Phone number and emergency number validation which checks both field values should not be same
+
+    editdoctorsPhoneNumberValidation(){
+        this.doctorlocators.setdoctorsPhoneNumber('01211773124');
+        this.phonenumberValidate();
+    } //Phone number format validation for BD
+
+    editdoctorsDOBValidation(){
+        this.doctorlocators.editdoctorsDOB()
+            .validateDOB();
+    } //DOB should  not be the current date
+
+    editdoctorPassingdateValidation(){
+        this.doctorlocators.editdoctorPasingYear()
+            .validatePassingYear();
+    } //Assuming passing date should not be the current date. Validation function
+
+    editdoctorsAddressusingvaliddata(){
+        this.doctorlocators.setdoctorsAddress('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+        this.gf.checkFieldValidationError('address', 'The address field must not be greater than 255 characters.');
+    } //Checking the max char limit of address field
+
+    usinginvalidDataINBasicInfo(){
+        this.doctorlocators.setdoctorsFirstName('        ')
+            .setdoctorsPhoneNumber(13117731245)
+            .editbasicinfoeducationandprofessionalUpdateButton();
+        this.gf.unabletocreateToastmessage()
+            .checkRequiredFieldErrors()
+            .checkFieldValidationError('personal_number', 'The personal number field format is invalid.')
+    } //Check personal number filed validation of error message
+
+    degreeNamevalidation(){
+        this.doctorlocators.editEducationButton()
+            .editEducationProfessionalExperienceAddButton()
+            .seteditdegreName('545415 *(*((*_+@'.repeat(51))
+        this.gf.checkFieldValidationError('')
+    } //Check degree name field validation
+
+    validateeditfunctionalityofEducation(){
+        this.doctorlocators.editEducationButton()
+            .editEducationProfessionalExperienceAddButton()
+            .seteditdegreName('MBBS')
+            .editdoctorAddEducationInfoButton()
+            .editEducationProfessionalExperienceAddButton()
+            .seteditdegreName('      ')
+            .educationSaveButton()
+        this.gf.unabletocreateToastmessage()
+            .checkRequiredFieldErrors();
+    } //If education part blank then create an education profile by filling mandatory field then edit the profile and keep blank the mandatory field. Check after click save button the toast message should be shown and required filed error message should be shown
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+export default DoctorsFunctions;
