@@ -33,7 +33,8 @@ module.exports = defineConfig({
         "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\department\\DuplicateDepartmentTest.cy.js",
         "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\department\\CreateDepartmentTest.cy.js",
         "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\patients\\PatientsDuplicateTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\patients\\PatientsCRUDTest.cy.js"
+        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\patients\\PatientsCRUDTest.cy.js",
+        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\doctors\\EditDoctorsTest.cy.js"
       ];
       return config;
     },

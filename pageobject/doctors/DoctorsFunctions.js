@@ -40,12 +40,12 @@ class DoctorsFunctions{
         return this;
     }
 
-    phonenumberValidate(doctorsphonenumber)
+    phonenumberValidate(doctorsphoneNumber)
     {
-        this.doctorlocators.setdoctorsPhoneNumber(doctorsphonenumber);
+        this.doctorlocators.setdoctorsPhoneNumber(doctorsphoneNumber);
 
         const validPrefixes = ['017', '013', '014', '015', '018', '019', '016'];
-        const isValid = doctorsphonenumber.length === 11 && validPrefixes.includes(doctorsphonenumber.substring(0, 3));
+        const isValid = doctorsphoneNumber.length === 11 && validPrefixes.includes(doctorsphoneNumber.substring(0, 3));
 
         if (!isValid) {
             this.globalfunction.checkFieldValidationError('phone', 'The phone field format is invalid.');
@@ -110,11 +110,19 @@ class DoctorsFunctions{
             .seteditdegreName('MBBS')
             .editdoctorAddEducationInfoButton()
             .editEducationProfessionalExperienceAddButton()
+            .educationEditButton()
             .seteditdegreName('      ')
             .educationSaveButton()
         this.gf.unabletocreateToastmessage()
             .checkRequiredFieldErrors();
     } //If education part blank then create an education profile by filling mandatory field then edit the profile and keep blank the mandatory field. Check after click save button the toast message should be shown and required filed error message should be shown
+
+  validateMedicalInstituteName(){
+        this.doctorlocators.editEducationButton()
+            .editEducationProfessionalExperienceAddButton()
+            .seteditdoctorMedicalInstituteName('789 %^*)_'.repeat(51))
+      this.gf.checkFieldValidationError('unversity_name', 'The university name formate is invalid')
+  }
 
     
 
