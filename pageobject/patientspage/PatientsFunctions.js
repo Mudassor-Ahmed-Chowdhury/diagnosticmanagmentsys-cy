@@ -7,11 +7,10 @@ class PatientsFunctions{
         this.globalfunction = new GlobalFunction();
     };
     patientsidDuplicate() {
-        this.patientslocators.patientsTable().then((cells) => {
-            const columnData = Array.from(cells).map(cell => cell.textContent.trim());
+        this.patientslocators.patientsTable().then(($cells) => {
+            const columnData = Array.from($cells).map(cell => cell.textContent.trim());
             const seen = new Set();
             const duplicates = new Set();
-
             columnData.forEach(item => {
                 if (seen.has(item)) {
                     duplicates.add(item);
@@ -19,11 +18,9 @@ class PatientsFunctions{
                     seen.add(item);
                 }
             });
-
             if (duplicates.size > 0) {
                 cy.log(`Non-unique data found: ${[...duplicates].join(', ')}`);
                 expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but found duplicates: ${[...duplicates].join(', ')}`);
-                throw new Error(`Duplicate data found: ${duplicateItems}`);
             } else {
                 cy.log('All data in column is unique.');
             }

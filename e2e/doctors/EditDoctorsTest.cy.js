@@ -38,4 +38,40 @@ describe('Edit doctors field and functionality',()=>{
     it('Should checking the max char limit of address field', () => {
         doctorsFunctions.editdoctorsAddressusingvaliddata();
     });
+
+    it('Check personal number filed validation of error message', ()=>{
+        doctorsFunctions.usinginvalidDataINBasicInfo();
+    });
+
+    it('Check degree name field validation', ()=>{
+        doctorsFunctions.degreeNamevalidation();
+    });
+
+    it('ValidateeditfunctionalityofEducation', ()=>{
+        doctorsFunctions.validateeditfunctionalityofEducation();
+    });
+
+    it('Validate medical institute name', ()=>{
+        doctorsFunctions.validateMedicalInstituteName();
+    });
+
+    it('Validate designation name', () =>{
+        doctorsFunctions.validationDesignationName();
+    });
+
+    it('Validation responsibilities', ()=>{
+        doctorsFunctions.validationResponsibilities();
+    });
+
+    it('Start date and end date validation', ()=>{
+        doctorsFunctions.startDateAndEndDateValidation();
+    });
+
+    it('End date should not before start date', ()=>{
+        doctorsFunctions.endDateShouldNotBeforeOfStartDate();
+    });
+
+    it('Professional experience validation using invalid', ()=>{
+        doctorsFunctions.professionalExperienceValidationUsingInvalid();
+    });
 })

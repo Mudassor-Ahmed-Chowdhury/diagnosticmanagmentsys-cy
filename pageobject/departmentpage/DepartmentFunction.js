@@ -7,9 +7,20 @@ class DepartmentFunction{
         this.gf = new GlobalFunction();
     };
 
-    nameofdepartmentDataduplicate(){
-        this.dl.departmenttableDataofname().then((cells) => {
-            const columnData = Array.from(cells).map(cell => cell.textContent.trim());
+
+    nameofdepartmentDataduplicate() {
+        this.dl.departmenttableDataofname().then(($cells) => {
+            const columnData = Array.from($cells).map(cell => {
+                let normalized = cell.textContent.trim().toLowerCase();
+                normalized = normalized.replace(/[^\w\s]/gi, '');
+                normalized = normalized.replace(/\s+/g, ' ');
+                normalized = normalized.replace(/\b(\w+)(\s+\1\b)+/g, '$1');
+                normalized = normalized.replace(/(\b\S+\b)\s+\b\1\b/g, '$1');
+                normalized = normalized.replace(/\b(\w+)\s+(\1\s*)+\b/g, '$1');
+
+                return normalized;
+            }); // Remove special characters, multiple spaces with a single space, repeated words or phrases using regex patterns
+
             const seen = new Set();
             const duplicates = new Set();
             columnData.forEach(item => {
@@ -19,15 +30,17 @@ class DepartmentFunction{
                     seen.add(item);
                 }
             });
+
             if (duplicates.size > 0) {
                 cy.log(`Non-unique data found: ${[...duplicates].join(', ')}`);
-                expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but all data was non unique: ${[...seen].join(', ')}`);
+                expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but found duplicates: ${[...duplicates].join(', ')}`);
             } else {
-                cy.log('All data in column 2 is unique.');
+                cy.log('All data in column is unique.');
             }
         });
         return this;
-    }
+    } //Duplicate detection function
+
 
     //If search any data in search box then if data exist then show result else show epmty state
     searchBox(){

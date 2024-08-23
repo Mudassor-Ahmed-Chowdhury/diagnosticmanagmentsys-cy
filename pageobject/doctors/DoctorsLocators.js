@@ -18,15 +18,15 @@ class DoctorsLocators{
     };
 
     doctorsTable(){
-        cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+        return cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
             .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
         return this;
     }
 
     doctorsallTableselect(){
-        this.doctorsTable();
+        return this.doctorsTable();
         cy.xpath("//tbody[1]/tr/td");
-        return this;
+
     }
 
     addDoctor(){
@@ -89,7 +89,12 @@ class DoctorsLocators{
     editEducationButton(){
         cy.xpath("(//div[normalize-space()='Educations & Certifications'])[1]").click();
         return this;
-    }
+    }//Education & Certificate button's xpath
+
+    clickProfessionalExperienceButton(){
+        cy.xpath("(//div[normalize-space()='Professional Experience'])[1]").click();
+        return this;
+    }//Profesional experience button
 
     editEducationProfessionalExperienceAddButton(){
         cy.xpath("(//button[@type='button'])[3]").click();
@@ -140,7 +145,7 @@ class DoctorsLocators{
     seteditdoctorMedicalInstituteName(medicalname){
         cy.xpath("(//input[@placeholder='Ex: Dhaka Medical'])[1]").click().clear().type(medicalname).should('not.have.value', /[^a-zA-Z\s]/);
         return this;
-    }
+    }//Medical institute name's path of basic info
 
     editeducationAddMoreButton(){
         cy.xpath("(//span[normalize-space()='Add More'])[1]").as('btn').click();
@@ -154,10 +159,12 @@ class DoctorsLocators{
 
     seteditprofessionalexperinceofDesignationName(designationname){
         cy.xpath("(//input[@placeholder='Ex: Assistant Researcher'])[1]").click().clear().type(designationname).should('not.have.value', /[^a-zA-Z\s]/);
+        return this;
     }
 
     seteditprofessionalInstituteName(professionalinstitutename){
         cy.xpath("(//input[@placeholder='Ex: Dhaka Medical'])[1]").click().clear().type(professionalinstitutename).should('not.have.value', /[^a-zA-Z\s]/);
+        return this;
     }
 
     seteditprofessionalResponsibilities(professionalresposibilities)
@@ -190,6 +197,16 @@ class DoctorsLocators{
         return this;
     } //End Date of professional experience for current date
 
+    editprofessionalEndDateBeforeStartDate(){
+        cy.xpath("(//input[@aria-label='Datepicker input'])[2]").click()
+            .xpath("(//div[@aria-label='Calendar wrapper'])[1]").trigger("mouseenter")
+            .xpath("(//div[@class='dp__cell_inner dp__pointer dp__date_hover'][normalize-space()='8'])[1]").click()
+            .xpath("(//div[@class='dp__action_row'])[1]")
+            .xpath("(//div[@class='dp__action_buttons'])[1]")
+            .xpath("(//button[normalize-space()='Select'])[1]").as('btn').click();
+        return this;
+    }
+
 
     validateStartAndEndDateAreDifferent() {
         cy.xpath("(//input[@aria-label='Datepicker input'])[1]").invoke('val').then(startDate => {
@@ -219,7 +236,6 @@ class DoctorsLocators{
         cy.xpath("(//button[@type='submit'])[1]").as('btn').click();
         return this;
     }//Update button for basic info, educational info and professional info's same button
-
 
 
 }
