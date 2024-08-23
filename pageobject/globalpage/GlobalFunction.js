@@ -22,6 +22,7 @@ class GlobalFunction{
                     });
                 });
             });
+        return this;
     }
 
     checkRequiredFieldErrors() {
@@ -37,9 +38,9 @@ class GlobalFunction{
     }
 
     Adminuser(){
-         this.lp.setEmail('demo@dms.com');
-         this.lp.setPassword("password");
-         this.lp.Loginbutton();
+         this.lp.setEmail('demo@dms.com')
+             .setPassword("password")
+             .Loginbutton()
          return this;
     }
 

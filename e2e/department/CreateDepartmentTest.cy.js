@@ -12,8 +12,7 @@ describe('create deparment functionality', ()=>{
         cy.viewport(Cypress.config('viewportWidth'), Cypress.config('viewportHeight'));
         cy.visit(Cypress.config('baseUrl'));
         gf.Adminuser();
-        dl.sidebarDepartment();
-        dl.addDepartment();
+        dl.sidebarDepartment().addDepartment();
     });
 
 

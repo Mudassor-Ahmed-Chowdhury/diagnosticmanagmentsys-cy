@@ -12,9 +12,9 @@ describe('Duplicate UOM name should not exist in table', () => {
     });
 
     it('Duplicate data should not exist', () => {
-        pf.selectUOM();
+        pf.selectUOM()
         // pf.duplicateUOMname();
-        pf.checkUniqueColumnData()
+        .checkUniqueColumnData()
     })
 
 })

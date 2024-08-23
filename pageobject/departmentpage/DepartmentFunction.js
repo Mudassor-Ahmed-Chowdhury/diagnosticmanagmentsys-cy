@@ -44,24 +44,21 @@ class DepartmentFunction{
 
     //If search any data in search box then if data exist then show result else show epmty state
     searchBox(){
-        this.dl.setSearchbyname('Test Departments');
-        cy.wait(5000);
-        this.dl.searchByNameError();
+        this.dl.setSearchbyname('Test Departments')
+        .searchByNameError();
 
     }
 
     validDatawithdepartment(){
 
-        this.dl.setDepartmentname('x-ray Departments');
-        this.dl.deparmentSavebutton();
-        this.dl.successfulToastmessage().should('be.visible');
+        this.dl.setDepartmentname('x-ray Departments')
+        .deparmentSavebutton()
+        .successfulToastmessage().should('be.visible');
     }
 
     mandatoryfiledBlank(){
 
-        this.dl.setDepartmentname('           ');
-        this.dl.deparmentSavebutton();
-        this.dl.unabletocreateToastmessage().should('be.visible');
+        this.dl.setDepartmentname('           ').deparmentSavebutton().unabletocreateToastmessage().should('be.visible')
         this.gf.checkFieldValidationError('department name', 'This field is required');
 
     }
@@ -72,11 +69,9 @@ class DepartmentFunction{
 
     invalidCharlimitofdepartmentname(){
 
-        this.dl.setDepartmentname('Department'.repeat(51))
-        this.dl.deparmentSavebutton();
+        this.dl.setDepartmentname('Department'.repeat(51)).deparmentSavebutton();
         this.gf.checkFieldValidationError('department name', 'The department name field must not be greater than 50 characters.' )
     }
-
 
 }
 export default DepartmentFunction;

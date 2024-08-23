@@ -19,10 +19,12 @@ class BillsLocators {
     setSearchPatient(searchpatient){
         cy.xpath("(//input[contains(@class,'rounded-sm rtl:pl-0 rtl:pr-3.5')])[1]")
             .click().clear().type(searchpatient);
+        return this;
     }
 
     setDoctorRefenrence(doctorreference){
         cy.xpath("//input[contains(@aria-placeholder,'Dr. Ejajul Islam')]").click().clear.type(doctorreference);
+        return this;
     }
 
     setTest(test)
@@ -36,8 +38,8 @@ class BillsLocators {
         return this;
     }
     testAddButton(){
-        cy.xpath("(//button[contains(@class,'text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 focus:outline-none dark:focus:ring-blue-800 hover:bg-blue-800 dark:hover:bg-blue-700 !rounded-full text-sm px-4 py-2 inline-flex items-center grow')])[1]").
-            xpath("(//div[contains(@class,'ml-2')])[1]").click();
+        cy.xpath("(//button[contains(@class,'text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 focus:outline-none dark:focus:ring-blue-800 hover:bg-blue-800 dark:hover:bg-blue-700 !rounded-full text-sm px-4 py-2 inline-flex items-center grow')])[1]")
+            .xpath("(//div[contains(@class,'ml-2')])[1]").click();
         return this;
     }
 

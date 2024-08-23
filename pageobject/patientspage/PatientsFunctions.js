@@ -38,6 +38,7 @@ class PatientsFunctions{
         if (!isValid) {
             this.globalfunction.checkFieldValidationError('phone', 'The phone field format is invalid.');
         }
+        return this;
     }
     setEmailAndVerifyErrors() {
         const invalidEmails = [
@@ -56,6 +57,7 @@ class PatientsFunctions{
                 .should('have.value', email);
             this.globalfunction.checkFieldValidationError('email', message);
         });
+        return this;
     }
 
     invalidDOB(){
@@ -69,6 +71,7 @@ class PatientsFunctions{
         validationErrors.forEach(error => {
             this.globalfunction.checkFieldValidationError(error.field, error.message);
         });
+        return this;
     }
 
 
@@ -109,6 +112,7 @@ class PatientsFunctions{
         validationErrors.forEach(error => {
             this.globalfunction.checkFieldValidationError(error.field, error.message);
         });
+        return this;
     }
 
 
