@@ -5,9 +5,11 @@ class BillsLocators {
         this.gf = new GlobalFunction();
     };
 
+
+
     sidebarBills(){
-        this.gf.clickParentContent('Bills');
-        return this;
+            this.gf.clickParentContent('Bills');
+            return this;
     }
 
     clickNewBill(){
@@ -22,8 +24,19 @@ class BillsLocators {
         return this;
     }
 
+    clickZahir(){
+        cy.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/ul[1]/li[1]/div[1]/div[1]/div[1]").click();
+        return this;
+    }
+
+
     setDoctorRefenrence(doctorreference){
-        cy.xpath("//input[contains(@aria-placeholder,'Dr. Ejajul Islam')]").click().clear.type(doctorreference);
+        cy.xpath("//input[contains(@aria-placeholder,'Dr. Ejajul Islam')]").click().clear().type(doctorreference);
+        return this;
+    }
+
+    doctorTestReference(){
+        cy.xpath("//div[normalize-space()='Test']").click();
         return this;
     }
 
@@ -33,13 +46,32 @@ class BillsLocators {
         return this;
     }
 
-    testSample(){
-        cy.xpath("(//select[contains(@class,'w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg')])[1]").click();
+    clickLiverFunction() {
+        cy.waitUntil(() => {
+            return cy.xpath("//span[normalize-space()='Liver Function Tests (LFTs)']")
+                .should('not.have.css', 'pointer-events', 'none')
+                .click({ force: true });
+        });
         return this;
     }
+
+
+    testSample() {
+        cy.xpath("(//select[contains(@class,'w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg')])[1]")
+            .should('exist')
+            .and('be.visible');
+
+        cy.xpath("(//select[contains(@class,'w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg')])[1]")
+            .select('Urine', { force: true });
+        cy.wait(3000);
+
+        return this;
+    }
+
+
     testAddButton(){
-        cy.xpath("(//button[contains(@class,'text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 focus:outline-none dark:focus:ring-blue-800 hover:bg-blue-800 dark:hover:bg-blue-700 !rounded-full text-sm px-4 py-2 inline-flex items-center grow')])[1]")
-            .xpath("(//div[contains(@class,'ml-2')])[1]").click();
+        cy.xpath("(//span[normalize-space()='Add'])[1]").click();
+        cy.wait(3000);
         return this;
     }
 
@@ -53,7 +85,8 @@ class BillsLocators {
     }
 
     collectPayment(){
-        cy.xpath("(//span[normalize-space()='Collect Payment'])[1]").click()
+        cy.xpath("(//span[normalize-space()='Collect Payment'])[1]").click();
+        return this;
     }
 
     billsTable(){
@@ -61,6 +94,15 @@ class BillsLocators {
             .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
             .xpath("//tbody[1]/tr/td[4]");
         return this;
+    }
+
+    paymentCollect(){
+        cy.xpath("(//span[normalize-space()='Payment Collect'])[1]").click();
+    }
+
+    setamountField(){
+        cy.xpath("(//input[@class='w-[112px] text-right text-[18px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-2 text-sm'])[1]")
+            .click();
     }
 
 }
