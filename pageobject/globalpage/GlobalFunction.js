@@ -54,5 +54,17 @@ class GlobalFunction{
         return this;
     }
 
+    navigatedoubleBack() {
+        cy.go(-2); //using -2 for go back two steps in the browser history
+
+    }
+
+    navigatesingleBack(){
+        cy.go('back');
+    }
+
+
+
+
 }
 export default GlobalFunction;
