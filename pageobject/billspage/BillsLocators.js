@@ -98,11 +98,25 @@ class BillsLocators {
 
     paymentCollect(){
         cy.xpath("(//span[normalize-space()='Payment Collect'])[1]").click();
+        cy.wait(5000)
+        return this;
     }
 
     setamountField(){
         cy.xpath("(//input[@class='w-[112px] text-right text-[18px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 p-2 text-sm'])[1]")
             .click();
+    }
+
+    cashRecepitBillNoData(){
+        return cy.xpath("(//div[@class='px-2 py-1'])[1]")
+            // .xpath("(//div)[68]")
+            // .xpath("(//div)[69]")
+        return this;
+    }
+
+    recentExecuteBillsInvoiceNo(){
+        return cy.xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]");
+        return this;
     }
 
 }

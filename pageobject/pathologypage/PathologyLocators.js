@@ -11,28 +11,31 @@ class PathologyLocators{
         return this;
     }
 
+    sidebarSamplesButton(){
+        cy.xpath("(//span[normalize-space()='Samples'])[1]").click();
+        return this;
+    }
+
     samplesButton(){
         return cy.xpath("(//span[normalize-space()='Samples'])[1]").as('btn').click();
         return this;
     }
 
-    collectSample(){
-        cy.waitUntil(()=>{
-            return cy.xpath("(//span[normalize-space()='Collect Sample'])[1]").as('btn').click();
-        });
+    collectSample() {
+        return cy.xpath("(//span[normalize-space()='Collect Sample'])[1]").as('btn').click();
         return this;
     }
 
-    setsearchInvoice(searchinvoise){
-        return  cy.xpath("(//input[@placeholder='Ex: 2312031'])[1]").click().clear().type(searchinvoise);
+    typeInvoice(){
+        return cy.xpath("(//input[@placeholder='Ex: 2312031'])[1]")
+            .click()
+            .clear()
         return  this;
     }
 
     searchButton(){
-         cy.xpath("(//span[normalize-space()='Search'])[1]").click();
+         return  cy.xpath("(//span[normalize-space()='Search'])[1]").click();
          return this;
-
-
     }
 
     printAllLabel(){
@@ -55,12 +58,12 @@ class PathologyLocators{
     //             .check({force: true})
 
     selectallcheckbox() {
-        return cy.xpath("(//table[@class='w-full text-sm text-left text-gray-500 dark:text-gray-400 table mb-4'])[1]//tbody[1]/tr/td[4]").each(($row) => {
+        cy.xpath("(//table[@class='w-full text-sm text-left text-gray-500 dark:text-gray-400 table mb-4'])[1]//tbody[1]/tr/td[4]").each(($row) => {
             cy.wrap($row)
                 .xpath(".//label[@class='flex gap-3 items-center justify-start']//input[@class='w-4 h-4 rounded bg-gray-100 border-gray-300 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-600 dark:border-gray-500']")
                 .check({ force: true });
-            return this;
         });
+        return this;
     } //Single Checkbox in single row
 
     generateLabelButton(){
@@ -125,14 +128,14 @@ class PathologyLocators{
     // }
 
     collectSampleData() {
-       return  cy.xpath("(//div[@class='flex justify-between bg-[#EFF6FF] space-x-4 p-3 rounded-lg mb-8 text-sm'])[1]");
+         cy.xpath("(//div[@class='flex justify-between bg-[#EFF6FF] space-x-4 p-3 rounded-lg mb-8 text-sm'])[1]");
        return this;
 
     }
 
 
     reciveSample(){
-        return cy.xpath("(//span[normalize-space()='Receive Sample'])[1]").as('btn').click();
+         cy.xpath("(//span[normalize-space()='Receive Sample'])[1]").as('btn').click();
         return this;
     }
 

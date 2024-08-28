@@ -1,9 +1,11 @@
 import PathologyLocators from "../pathologypage/PathologyLocators";
 import GlobalFunction from "../globalpage/GlobalFunction";
+import BillsFunctions from "../billspage/BillsFunctions";
 class PathologyFunctions{
     constructor() {
         this.pathologyLocators = new PathologyLocators();
         this.globalFunction = new GlobalFunction();
+        this.billsFunctions = new BillsFunctions();
     }
 
     collectSampleDataFunction(){
@@ -95,13 +97,12 @@ class PathologyFunctions{
         });
     }
 
-    validCollectSampleFunctionality(){
-        this.pathologyLocators.collectSample()
-            .setsearchInvoice('2408272')
+    checktheCollectSamplePatientsData(){
+        this.pathologyLocators
+            .collectSample()
+            .typeInvoice('2408272')
             .searchButton()
-            .selectallcheckbox()
-        this.collectSampleDataFunction()
-
+        this.collectSampleDataFunction();
     }
 
 }

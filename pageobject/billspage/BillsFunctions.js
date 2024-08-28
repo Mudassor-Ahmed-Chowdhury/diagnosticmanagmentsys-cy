@@ -63,6 +63,23 @@ class BillsFunctions{
         });
     }
 
+    cashRecepitBillNoDataFunctions() {
+        this.billlocators.recentExecuteBillsInvoiceNo().within(() => {
+            cy.xpath("//tbody[1]/tr[1]/td[4]")
+                .invoke('text')
+                .then((billNo) => {
+                    this.billNo = billNo.trim();
+                    cy.log(`Bill No: ${this.billNo}`);
+                    window.localStorage.setItem('billNo', this.billNo);
+                });
+        });
+    }
+
+
+
+
+
+
 
 
 
@@ -77,8 +94,10 @@ class BillsFunctions{
             .clickLiverFunction()
             .testSample()
             .testAddButton()
-            // //.collectPayment()
-            // .paymentCollect()
+            .collectPayment()
+            .paymentCollect()
+            .sidebarBills()
+        this.cashRecepitBillNoDataFunctions()
 
     }
 
