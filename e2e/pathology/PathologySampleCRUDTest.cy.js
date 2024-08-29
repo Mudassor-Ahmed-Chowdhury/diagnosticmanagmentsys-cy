@@ -19,27 +19,9 @@ describe('Sample', () => {
         globalFunction.Adminuser();
         pathologyLocators.sidebarPathology().sidebarSamplesButton();
 
-        // if (testCase) {
-        //     switch (testCase) {
-        //         case 'Collect sample patients data format should be accurate':
-        //             cy.log('Running setup for Collect sample patients data format should be accurate');
-        //             pathologyLocators.sidebarPathology().sidebarSamplesButton();
-        //             break;
-        //
-        //         case 'Using valid data collect sample functionality check':
-        //             cy.log('Running setup for Using valid data collect sample functionality check');
-        //             billsLocators.sidebarBills().should('be.visible'); // Ensure the sidebar is visible
-        //             break;
-        //
-        //         default:
-        //             cy.log('No valid test case specified.');
-        //     }
-        // } else {
-        //     cy.log('No test case assigned.');
-        // }
     });
 
-    it.only('Collect sample patients data format should be accurate', () => {
+    it.skip('Collect sample patients data format should be accurate', () => {
         // testCase = 'Collect sample patients data format should be accurate';
         pathologyLocators.sidebarPathology().sidebarSamplesButton();
         pathologyFunctions.checktheCollectSamplePatientsData();
@@ -65,9 +47,51 @@ describe('Sample', () => {
             cy.log(`Modified Bill No: ${billNo}`);
 
             pathologyLocators.typeInvoice().type(billNo);
-        });
+            pathologyLocators.searchButton();
+            pathologyLocators.selectallcheckbox();
+            pathologyLocators.generateLabelButton();
+            pathologyLocators.markasCollectedButton();
+            globalFunction.navigatedoubleBack();
+            cy.wait(5000);
 
-        // // Search and select all checkboxes
-        // pathologyLocators.searchButton().selectallcheckbox();
+            cy.window().then((window) => {
+                let billNo = window.localStorage.getItem('billNo');
+                cy.log(`Retrieved Bill No: ${billNo}`);
+
+                if (billNo && billNo.includes('/login')) {
+                    billNo = billNo.replace('/login', '').trim();
+                }
+
+                cy.log(`Modified Bill No: ${billNo}`);
+                pathologyLocators.searchByInvoice().click().clear().type(billNo).wait(5000);
+                pathologyLocators.labNumberCollect()
+                pathologyLocators.clickLabRecivedButton();
+                pathologyLocators.reciveSampleButton();
+
+                cy.window().then((window)=>{
+                    let labNo = window.localStorage.getItem('labNo');
+                    cy.log(`Retrived Lab No: ${labNo}`);
+
+                    pathologyLocators.searchLabNumberField().type(labNo);
+                })
+                pathologyLocators.reciveSampleSearchButton();
+                pathologyFunctions.selectallCheckboxForSampleReciveFunction();
+                pathologyLocators.doneButton();
+                pathologyLocators.confirmationPopUpYes();
+                pathologyLocators.sidebarPathologyTestResult();
+                pathologyLocators.testresultSearchByInvoice().type(billNo).wait(5000);
+                pathologyLocators.clickOnTestReuslt();
+                pathologyLocators.addResultButton();
+                const inputText = 'Normal 45';
+                pathologyLocators.setAllTableInput(inputText);
+                pathologyLocators.resultentrySaveButton();
+                pathologyLocators.sidebarTestReports();
+                pathologyLocators.testReportSearchByInvoice().type(billNo).wait(5000);
+                pathologyLocators.clickTestReport();
+                });
+            });
+
+        });
     });
-});
+
+

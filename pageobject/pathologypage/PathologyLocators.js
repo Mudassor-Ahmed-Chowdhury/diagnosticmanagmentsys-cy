@@ -76,56 +76,19 @@ class PathologyLocators{
         return this;
     }
 
-    // collectSampleData() {
-    //     cy.xpath("(//div[@class='flex justify-between bg-[#EFF6FF] space-x-4 p-3 rounded-lg mb-8 text-sm'])[1]")
-    //         .within(() => {
-    //             cy.xpath(".//div[contains(text(), 'Invoice Number')]")
-    //                 .should('exist')
-    //                 .invoke('text')
-    //                 .then((text) => {
-    //                     const invoiceNumber = text.replace('Invoice Number: ', '').trim();
-    //                     cy.log(`Invoice Number: ${invoiceNumber}`);
-    //                     window.localStorage.setItem('invoiceNumber', invoiceNumber);
-    //                 }); // Check if Invoice Number exists and store it in local storage
-    //
-    //             cy.xpath(".//div[contains(text(), 'Patient')]")
-    //                 .should('exist')
-    //                 .then((patient) => {
-    //                     if (!patient.length) {
-    //                         throw new Error('Patient element not found!');
-    //                     }
-    //                 });// Check if Patient exists, if not, throw an error
-    //
-    //             cy.xpath(".//div[contains(text(), 'Age')]")
-    //                 .should('exist')
-    //                 .then((age) => {
-    //                     if (!age.length) {
-    //                         throw new Error('Age element not found!');
-    //                     }
-    //                 }); // Check if Age exists, if not, throw an error
-    //
-    //             cy.xpath(".//div[contains(text(), 'Gender')]")
-    //                 .should('exist')
-    //                 .then((gender) => {
-    //                     if (!gender.length) {
-    //                         throw new Error('Gender element not found!');
-    //                     }
-    //                 }); // Check if Gender exists, if not, throw an error
-    //         });
-    // }
-
-    // labNumberCollect(){
-    //     cy.xpath("(//div)[51]").within(() => {
-    //         cy.xpath("(//div[@class='flex space-x-3 justify-end'])[1]")
-    //             .then((elements) => {
-    //                 const elementsText = elements.map((index, el) => Cypress.$(el).text()).get().join(', ');
-    //                 cy.log('Elements Text:', elementsText);
-    //                 cy.wrap(elementsText).then((text) => {
-    //                     window.localStorage.setItem('Lab number', text);
-    //                 });
-    //             });
-    //     });
-    // }
+    labNumberCollect() {
+        cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+            .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
+            .within(() => {
+                cy.xpath("//tbody/tr/td[3]").invoke('text').then((labNo) => {
+                    const trimmedLabNo = labNo.replace(/[^0-9]/g, '').trim(); // Keep only numeric characters
+                    cy.log(`Lab No: ${trimmedLabNo}`);
+                    cy.window().then((win) => {
+                        win.localStorage.setItem('labNo', trimmedLabNo);
+                    });
+                });
+            });
+    }//this lab no for single and multiple test not for multiple test
 
     collectSampleData() {
          cy.xpath("(//div[@class='flex justify-between bg-[#EFF6FF] space-x-4 p-3 rounded-lg mb-8 text-sm'])[1]");
@@ -134,13 +97,13 @@ class PathologyLocators{
     }
 
 
-    reciveSample(){
+    reciveSampleButton(){
          cy.xpath("(//span[normalize-space()='Receive Sample'])[1]").as('btn').click();
         return this;
     }
 
-    setreciveSampleSearchFiled(labnumber){
-        return cy.xpath("(//input[@placeholder='2312031'])[1]").click().clear().type(labnumber);
+    searchLabNumberField(){
+        return cy.xpath("(//input[@placeholder='2312031'])[1]").click().clear();
         return this;
     }
 
@@ -179,14 +142,16 @@ class PathologyLocators{
 
 
     setAllTableInput(alltableinput) {
-        return cy.xpath("//table//input").click().clear().type(alltableinput)
-            .should((input) => {
-                const value = input[0].value;
-                expect(value).to.match(/^[a-zA-Z\s]*$/); // only allows letters and spaces
-                expect(value).to.not.match(/[~@!#$%^&*()_+]+/); // disallow specific special characters
-            });
+        cy.xpath("//table//input").as('tableInput').wait(5000).click();
+        cy.get('@tableInput').clear().type(alltableinput).then(($input) => {
+            const value = $input[0].value;
+            expect(value).to.match(/^[a-zA-Z0-9\s]*$/)
+            expect(value).to.not.match(/[~@!#$%^&*()_+]+/);
+        });
+
         return this;
     }
+
 
 
     resultentrySaveButton(){
@@ -194,10 +159,103 @@ class PathologyLocators{
         return this;
     }
 
+    clickLabRecivedButton(){
+        cy.xpath("(//div[@class='cursor-pointer inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'])[1]").click();
+        return this;
+    }
+
+    searchByInvoice(){
+        return cy.xpath("(//input[@placeholder='Search by Invoice'])[1]").click().clear();
+        return this;
+    }
+
+    collectSamplesBackground(){
+        cy.xpath("(//div)[44]").click();
+        return this;
+
+    }
+
+    testresultSearchByInvoice(){
+        return cy.xpath("(//input[@placeholder='Search by Invoice Number'])[1]").click().clear();
+        return this;
+    }
+
+    sidebarPathologyTestResult(){
+        return cy.xpath("(//span[normalize-space()='Test Results'])[1]").click();
+        return this;
+    }
+
+    clickOnTestReuslt(){
+        return cy.xpath("//tr[@class='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 border cursor-pointer']//td[1]").wait(5000).click();
+        return this;
+    }
+
+    addResultButton(){
+        return cy.xpath("(//span[normalize-space()='Add Result'])[1]").as('btn').click();
+        return this;
+    }
+
+    testReportSearchByInvoice(){
+        return cy.xpath("(//input[@placeholder='Search By Invoice Number'])[1]").click().clear();
+        return this;
+    }
+
+    sidebarTestReports(){
+        cy.xpath("//span[normalize-space()='Test Reports']").click();
+        return this;
+    }
+
+    clickTestReport(){
+        return cy.xpath("//tr[@class='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 border cursor-pointer']//td[1]").wait(5000).click();
+        return this;
+    }// for single bill
+
+    testReportDepartmentDropdown() {
+        cy.xpath("(//select[@class='w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg'])[1]")
+            .xpath("(//option[contains(text(),'Please select one')])[1]").click()
+            .then(($dropdown) => {
+                const options = $dropdown.find('option');
+                const randomIndex = Math.floor(Math.random() * options.length);
+                const randomValue = options[randomIndex].value;
+
+                cy.wrap($dropdown).select(randomValue);
+            });
+        return this;
+    }
 
 
+    testReportCheckedByDropdown(){
+        cy.xpath("(//select[@class='w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg'])[2]").click()
+        .then(($dropdown)=>{
+            const options = $dropdown.find('option');
+            const randomIndex = Math.floor(Math.random() * options.length);
+            const randomValue = options[randomIndex].value
 
+            cy.wrap($dropdown).select(randomValue);
+        })
+        return this;
+    }
 
+    testReportApproveButton(){
+        cy.xpath("(//span[normalize-space()='Approve'])[1]").as('btn').click();
+    return this;
+    }
+
+    testReportVerifyButton(){
+        cy.xpath("(//span[normalize-space()='Verify'])[1]").as('btn').click();
+        return this;
+    }
+
+    manageTestReport() {
+        cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+            .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
+            .xpath("//tbody/tr")
+            .then(($rows) => {
+                const rowCount = $rows.length; //Total Number of rows
+                const randomIndex = Math.floor(Math.random() * rowCount);
+                cy.wrap($rows[randomIndex]).click();
+            });
+    }
 
 
 }

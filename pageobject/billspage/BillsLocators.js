@@ -13,8 +13,7 @@ class BillsLocators {
     }
 
     clickNewBill(){
-        cy.xpath("(//button[@class='text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg dark:bg-blue-600 focus:outline-none dark:focus:ring-blue-800 hover:bg-blue-800 dark:hover:bg-blue-700 !rounded-full text-sm px-4 py-2 inline-flex items-center'])[1]")
-            .xpath("(//span[normalize-space()='New Bill'])[1]").click();
+         cy.xpath("(//span[normalize-space()='New Bill'])[1]").click();
         return this;
     }
 

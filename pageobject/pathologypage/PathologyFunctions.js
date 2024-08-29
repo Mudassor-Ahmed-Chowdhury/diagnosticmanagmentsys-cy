@@ -95,7 +95,7 @@ class PathologyFunctions{
                 .xpath("(//input[@id='red-checkbox'])[1]")
                 .check({ force: true });
         });
-    }
+    }// Lab recived action cloumn checkbox
 
     checktheCollectSamplePatientsData(){
         this.pathologyLocators
