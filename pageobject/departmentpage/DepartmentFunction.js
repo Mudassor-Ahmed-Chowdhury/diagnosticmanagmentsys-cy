@@ -51,8 +51,8 @@ class DepartmentFunction{
 
     validDatawithdepartment(){
 
-        this.dl.setDepartmentname('x-ray Departments')
-        .deparmentSavebutton()
+        this.dl.setDepartmentname('Orthopadics and Medicine')
+            .deparmentSavebutton()
         .successfulToastmessage().should('be.visible');
     }
 
@@ -69,7 +69,7 @@ class DepartmentFunction{
 
     invalidCharlimitofdepartmentname(){
 
-        this.dl.setDepartmentname('Department'.repeat(51)).deparmentSavebutton();
+        this.dl.setDepartmentname('O '.repeat(51)).deparmentSavebutton();
         this.gf.checkFieldValidationError('department name', 'The department name field must not be greater than 50 characters.' )
     }
 

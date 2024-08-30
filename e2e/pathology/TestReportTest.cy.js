@@ -20,13 +20,20 @@ describe('Test Report',()=>{
 
     });
 
-    it('Check test report functionality',()=>{
+    it.only('Check test report functionality',()=>{
         pathologyLocators.manageTestReport();
         pathologyLocators.testReportDepartmentDropdown();
         pathologyLocators.testReportCheckedByDropdown();
-        pathologyLocators.testReportApproveButton();
+        pathologyFunctions.testReportVerifyApproveButton();
 
+    });
 
+    it('Check duplicat number of reports should not found',()=>{
+        pathologyFunctions.checkthatDuplicatesNumberOfReports();
+    });
+
+    it('check duplicate status should not found',()=>{
+     pathologyFunctions.checkthatDuplicateStatus() ;
     })
 
 

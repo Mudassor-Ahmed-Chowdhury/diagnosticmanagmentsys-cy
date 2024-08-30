@@ -76,14 +76,6 @@ class BillsFunctions{
     }
 
 
-
-
-
-
-
-
-
-
     validBills(){
         this.billlocators.clickNewBill()
             .setSearchPatient('Zahirul')

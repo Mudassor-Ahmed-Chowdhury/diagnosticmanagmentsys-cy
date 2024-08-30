@@ -16,11 +16,20 @@ class DepartmentLocators{
         return this;
     }
 
-    setDepartmentname(departmentname){
-        return cy.xpath("(//input[@placeholder='Enter Department Name'])[1]").click().clear().type(departmentname)
-            .should('not.have.value', /[^a-zA-Z\s]/);
+    setDepartmentname(departmentName) {
+
+        cy.xpath("(//input[@placeholder='Enter Department Name'])[1]").click().clear().type(departmentName, { delay: 100 }) // added a delay between keystrokes
+        .then(($input) => {
+                expect($input).to.have.value(departmentName); // assert the value after typing
+            });
+        // validate the department name after typing
+        cy.wrap(departmentName).then((input) => {
+            // check if the department name consists only of numeric or special characters
+            if (/^[^a-zA-Z\s]*$/.test(input)) {
+                throw new Error('Department name cannot consist entirely of numeric or special characters.');
+            }
+        });
         return this;
-        
     }
 
     selectDepartmenthead(){
@@ -30,7 +39,7 @@ class DepartmentLocators{
     }
 
     deparmentSavebutton() {
-        return cy.xpath("(//span[normalize-space()='Save'])[1]").click();
+         cy.xpath("(//span[normalize-space()='Save'])[1]").as('btn').click();
         return this;
     }
 
@@ -47,11 +56,12 @@ class DepartmentLocators{
     }
 
     setSearchbyname(searchbyname){
-        return cy.xpath("(//input[@placeholder='Search by name'])[1]").click().clear().type(searchbyname);
+        cy.xpath("(//input[@placeholder='Search by name'])[1]").click().clear().type(searchbyname);
         return this;
     }
 
     searchByNameError() {
+        cy.wait(5000);
         cy.get("body div iframe")
             .its('0.contentDocument.body', { log: true })
             .should('be.visible')

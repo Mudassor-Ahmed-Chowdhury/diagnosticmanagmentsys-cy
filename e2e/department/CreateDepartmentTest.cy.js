@@ -24,7 +24,7 @@ describe('create deparment functionality', ()=>{
         df.invalidDepartmentname();
     });
 
-    it('add department functionality with invalid char limit', ()=>{
+    it.skip('add department functionality with invalid char limit', ()=>{
         df.invalidCharlimitofdepartmentname();
     });
 

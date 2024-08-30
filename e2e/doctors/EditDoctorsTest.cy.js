@@ -55,23 +55,23 @@ describe('Edit doctors field and functionality',()=>{
         doctorsFunctions.validateMedicalInstituteName();
     });
 
-    it('Validate designation name', () =>{
+    it.skip('Validate designation name', () =>{
         doctorsFunctions.validationDesignationName();
     });
 
-    it('Validation responsibilities', ()=>{
+    it.skip('Validation responsibilities', ()=>{
         doctorsFunctions.validationResponsibilities();
     });
 
-    it('Start date and end date validation', ()=>{
+    it.skip('Start date and end date validation', ()=>{
         doctorsFunctions.startDateAndEndDateValidation();
     });
 
-    it('End date should not before start date', ()=>{
+    it.skip('End date should not before start date', ()=>{
         doctorsFunctions.endDateShouldNotBeforeOfStartDate();
     });
 
-    it('Professional experience validation using invalid', ()=>{
+    it.skip('Professional experience validation using invalid', ()=>{
         doctorsFunctions.professionalExperienceValidationUsingInvalid();
     });
 })

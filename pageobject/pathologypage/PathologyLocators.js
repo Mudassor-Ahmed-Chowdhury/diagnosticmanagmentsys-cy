@@ -211,27 +211,27 @@ class PathologyLocators{
     }// for single bill
 
     testReportDepartmentDropdown() {
-        cy.xpath("(//select[@class='w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg'])[1]")
-            .xpath("(//option[contains(text(),'Please select one')])[1]").click()
+        // Get the array of options, filtering out disabled ones
+        cy.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/label[1]/select[1]/option[not(@disabled)]")
             .then(($dropdown) => {
-                const options = $dropdown.find('option');
-                const randomIndex = Math.floor(Math.random() * options.length);
-                const randomValue = options[randomIndex].value;
-
-                cy.wrap($dropdown).select(randomValue);
+                const randomOption = Math.floor(Math.random() * $dropdown.length);
+                // Select option from dropdown
+                cy.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/label[1]/select[1]").select(`${$dropdown[randomOption].innerText}`);
+                cy.log(`Random option selected is ${$dropdown[randomOption].innerText}`);
             });
         return this;
     }
 
 
-    testReportCheckedByDropdown(){
-        cy.xpath("(//select[@class='w-full text-gray-900 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 p-2.5 text-sm border border-gray-300 rounded-lg'])[2]").click()
-        .then(($dropdown)=>{
-            const options = $dropdown.find('option');
-            const randomIndex = Math.floor(Math.random() * options.length);
-            const randomValue = options[randomIndex].value
 
-            cy.wrap($dropdown).select(randomValue);
+    testReportCheckedByDropdown(){
+        // Get the array of options, filtering out disabled ones
+        cy.xpath("(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/label[1]/select[1]/option[not(@disabled)])")
+        .then(($dropdown)=>{
+            const randomOption = Math.floor(Math.random() * $dropdown.length);
+            //Select option from dropdown
+            cy.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/label[1]/select[1]").select(`${$dropdown[randomOption].innerText}`);
+            cy.log(`Random option selected is ${$dropdown[randomOption].innerText}`);
         })
         return this;
     }
@@ -257,6 +257,19 @@ class PathologyLocators{
             });
     }
 
+    manageTestReportNumberOfReportsDuplicate(){
+        return cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+            .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
+            .xpath("//tbody/tr/td[5]")
+        return this;
+    }
+
+    manageTestReportNumberOfStatusDuplicate(){
+        return cy.xpath("(//div[@class='relative shadow sm:rounded-lg mt-3 overflow-x-auto'])[1]")
+            .xpath("(//table[@class='w-full text-sm text-gray-500 dark:text-gray-400 border-collapse'])[1]")
+            .xpath("//tbody/tr/td[6]")
+        return this;
+    }
 
 }
 export default PathologyLocators;

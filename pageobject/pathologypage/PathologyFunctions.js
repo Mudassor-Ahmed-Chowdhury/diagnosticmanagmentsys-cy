@@ -105,6 +105,74 @@ class PathologyFunctions{
         this.collectSampleDataFunction();
     }
 
+    checkthatDuplicatesNumberOfReports(){
+        return this.pathologyLocators.manageTestReportNumberOfReportsDuplicate()
+            .then(($cells) => {
+                const columnData = Array.from($cells).map(cell => cell.textContent.trim());
+                const seen = new Set();
+                const duplicates = new Set();
+                columnData.forEach(item => {
+                    if (seen.has(item)) {
+                        duplicates.add(item);
+                    } else {
+                        seen.add(item);
+                    }
+                });
+                if (duplicates.size > 0) {
+                    cy.log(`Non-unique data found: ${[...duplicates].join(', ')}`);
+                    expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but found duplicates: ${[...duplicates].join(', ')}`);
+                } else {
+                    cy.log('All data in column is unique.');
+                }
+            });
+        return this;
+    }
+
+    checkthatDuplicateStatus(){
+        return this.pathologyLocators.manageTestReportNumberOfStatusDuplicate().then(($cells) => {
+            const columnData = Array.from($cells).map(cell => cell.textContent.trim());
+            const seen = new Set();
+            const duplicates = new Set();
+            columnData.forEach(item => {
+                if (seen.has(item)) {
+                    duplicates.add(item);
+                } else {
+                    seen.add(item);
+                }
+            });
+            if (duplicates.size > 0) {
+                cy.log(`Non-unique data found: ${[...duplicates].join(', ')}`);
+                expect(duplicates.size).to.be.lessThan(0, `Expected unique data, but found duplicates: ${[...duplicates].join(', ')}`);
+            } else {
+                cy.log('All data in column is unique.');
+            }
+        });
+        return this;
+
+    }
+
+    testReportVerifyApproveButton() {
+        // Attempt to find and click the "Approve" button
+        return cy.xpath("(//span[normalize-space()='Approve'])[1]", { timeout: 0 }).then(($approveBtn) => {
+            if ($approveBtn.length > 0) {
+                cy.wrap($approveBtn).click();
+                cy.log('Clicked the Approve button');
+                return this;
+            }
+            // If "Approve" button is not found, attempt to find and click the "Verify" button
+            return cy.xpath("(//span[normalize-space()='Verify'])[1]").then(($verifyBtn) => {
+                if ($verifyBtn.length > 0) {
+                    cy.wrap($verifyBtn).click();
+                    cy.log('Clicked the Verify button');
+                } else {
+                    cy.log('Neither Approve nor Verify button was found');
+                }
+                return this;
+            });
+        });
+    }
+
+
 }
 export default PathologyFunctions;
 

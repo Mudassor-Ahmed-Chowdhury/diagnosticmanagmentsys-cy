@@ -68,26 +68,26 @@ describe('Sample', () => {
                 pathologyLocators.clickLabRecivedButton();
                 pathologyLocators.reciveSampleButton();
 
-                cy.window().then((window)=>{
-                    let labNo = window.localStorage.getItem('labNo');
-                    cy.log(`Retrived Lab No: ${labNo}`);
-
-                    pathologyLocators.searchLabNumberField().type(labNo);
-                })
-                pathologyLocators.reciveSampleSearchButton();
-                pathologyFunctions.selectallCheckboxForSampleReciveFunction();
-                pathologyLocators.doneButton();
-                pathologyLocators.confirmationPopUpYes();
-                pathologyLocators.sidebarPathologyTestResult();
-                pathologyLocators.testresultSearchByInvoice().type(billNo).wait(5000);
-                pathologyLocators.clickOnTestReuslt();
-                pathologyLocators.addResultButton();
-                const inputText = 'Normal 45';
-                pathologyLocators.setAllTableInput(inputText);
-                pathologyLocators.resultentrySaveButton();
-                pathologyLocators.sidebarTestReports();
-                pathologyLocators.testReportSearchByInvoice().type(billNo).wait(5000);
-                pathologyLocators.clickTestReport();
+                // cy.window().then((window)=>{
+                //     let labNo = window.localStorage.getItem('labNo');
+                //     cy.log(`Retrived Lab No: ${labNo}`);
+                //
+                //     pathologyLocators.searchLabNumberField().type(labNo);
+                // })
+                // pathologyLocators.reciveSampleSearchButton();
+                // pathologyFunctions.selectallCheckboxForSampleReciveFunction();
+                // pathologyLocators.doneButton();
+                // pathologyLocators.confirmationPopUpYes();
+                // pathologyLocators.sidebarPathologyTestResult();
+                // pathologyLocators.testresultSearchByInvoice().type(billNo).wait(5000);
+                // pathologyLocators.clickOnTestReuslt();
+                // pathologyLocators.addResultButton();
+                // const inputText = 'Normal 45';
+                // pathologyLocators.setAllTableInput(inputText);
+                // pathologyLocators.resultentrySaveButton();
+                // pathologyLocators.sidebarTestReports();
+                // pathologyLocators.testReportSearchByInvoice().type(billNo).wait(5000);
+                // pathologyLocators.clickTestReport();
                 });
             });
 

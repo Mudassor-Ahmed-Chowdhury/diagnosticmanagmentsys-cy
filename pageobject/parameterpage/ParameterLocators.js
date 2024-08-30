@@ -1,6 +1,6 @@
 class ParameterLocators{
     setnameofUOM(uomname){
-        return cy.xpath("//input[@placeholder='cells/�L']").click().click().type(uomname).wait(3000);
+        return cy.get('div[placeholder="cells/µL"] > .flex > .bg-gray-50').click().click().type(uomname).wait(3000);
         return this;
     }
 
