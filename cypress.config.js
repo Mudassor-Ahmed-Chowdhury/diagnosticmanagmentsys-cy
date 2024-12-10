@@ -23,20 +23,20 @@ module.exports = defineConfig({
 
 
       config.specPattern = [
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\parameter\\CreateUOMTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\parameter\\DuplicateUOMTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\parameter\\TestValidInavlidFieldTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\parameter\\TestAdditionalItemsTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\department\\DuplicateDepartmentTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\department\\CreateDepartmentTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\patients\\PatientsDuplicateTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\patients\\PatientsCRUDTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\doctors\\EditDoctorsTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\doctors\\DuplicateDoctorsTableTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\bills\\DuplicateInvoiceTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\bills\\BillsCRUDTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\pathology\\PathologySampleCRUDTest.cy.js",
-        "C:\\Users\\SOFTZINO\\cypress\\digonsiticmanagementsys-cy\\cypress\\e2e\\pathology\\TestReportTest.cy.js"
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\parameter\\CreateUOMTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\parameter\\DuplicateUOMTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\parameter\\TestValidInavlidFieldTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\parameter\\TestAdditionalItemsTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\department\\CreateDepartmentTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\department\\DuplicateDepartmentTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\digonsiticmanagementsys-cy\\e2e\\patients\\PatientsDuplicateTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\digonsiticmanagementsys-cy\\e2e\\patients\\PatientsCRUDTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\doctors\\DuplicateDoctorsTableTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\doctors\\EditDoctorsTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\bills\\DuplicateInvoiceTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\bills\\BillsCRUDTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\pathology\\PathologySampleCRUDTest.cy.js",
+        "C:\\Users\\SOFTZINO\\AquaProjects\\diagnosticmanagmentsys-cy\\e2e\\pathology\\TestReportTest.cy.js"
       ];
 
       return config;
